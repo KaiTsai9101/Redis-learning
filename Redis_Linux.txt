@@ -1,0 +1,500 @@
+[root@node1 ~]# wget http://download.redis.io/releases/redis-6.2.6.tar.gz
+--2026-05-22 16:25:49--  http://download.redis.io/releases/redis-6.2.6.tar.gz
+正在解析主机 download.redis.io (download.redis.io)... 104.18.27.34, 104.18.26.34, 2606:4700::6812:1b22, ...
+正在连接 download.redis.io (download.redis.io)|104.18.27.34|:80... 已连接。
+已发出 HTTP 请求，正在等待回应... 200 OK
+长度：2476542 (2.4M) [application/octet-stream]
+正在保存至: “redis-6.2.6.tar.gz”
+
+100%[=================================================================>] 2,476,542   1.73MB/s 用时 1.4s   
+
+2026-05-22 16:25:51 (1.73 MB/s) - 已保存 “redis-6.2.6.tar.gz” [2476542/2476542])
+
+[root@node1 ~]# ll
+总用量 1891868
+-rw-------. 1 root root      2815 12月 21 16:38 anaconda-ks.cfg
+-rw-r--r--  1 root root 326940667 1月  12 15:23 apache-hive-3.1.3-bin.tar.gz
+-rw-r--r--  1 root root   9623007 1月  15 2021 apache-zookeeper-3.5.9-bin.tar.gz
+drwxr-xr-x  3 root root        16 12月 28 16:20 data
+-rw-r--r--  1 root root 288915095 12月 28 18:44 flink-1.10.0-bin-scala_2.11.tgz
+-rw-r--r--  1 root root 500749234 12月 28 15:59 hadoop-3.3.0.tar.gz
+-rw-r--r--  1 root root 265818867 12月 28 16:57 hbase-2.1.0-bin.tar.gz
+-rw-r--r--. 1 root root 168358390 12月 25 14:45 jdk-11.0.29_linux-x64_bin.tar.gz
+-rw-r--r--  1 root root  79462779 12月 28 11:26 jdk-8u471-linux-x64.tar.gz
+-rw-r--r--  1 root root  62358954 12月 28 14:50 kafka_2.12-2.4.1.tgz
+-rw-------. 1 root root      2095 12月 21 16:38 original-ks.cfg
+-rw-r--r--  1 root root   2476542 10月  4 2021 redis-6.2.6.tar.gz
+-rw-r--r--  1 root root 232530699 12月 28 17:53 spark-2.4.5-bin-hadoop2.7.tgz
+-rw-r--r--  1 root root        21 12月 28 16:40 words.txt
+[root@node1 ~]# yum install -y gcc tcl
+已加载插件：fastestmirror, langpacks
+Repository 'nginx-mainline': Error parsing config: Error parsing "baseurl = 'heep://nginx.org/packages/mainline/centos/7/x86_64/'": URL must be http, ftp, file or https not "heep"
+Loading mirror speeds from cached hostfile
+ * base: mirrors.aliyun.com
+ * epel: ftp.iij.ad.jp
+ * extras: mirrors.aliyun.com
+ * updates: mirrors.aliyun.com
+https://packagecloud.io/rabbitmq/erlang/el/7/x86_64/repodata/repomd.xml: [Errno 14] HTTPS Error 302 - Found
+正在尝试其它镜像。
+https://packagecloud.io/rabbitmq/erlang/el/7/SRPMS/repodata/repomd.xml: [Errno 14] HTTPS Error 302 - Found
+正在尝试其它镜像。
+https://packagecloud.io/rabbitmq/rabbitmq-server/el/7/x86_64/repodata/repomd.xml: [Errno 14] HTTPS Error 302 - Found
+正在尝试其它镜像。
+https://packagecloud.io/rabbitmq/rabbitmq-server/el/7/SRPMS/repodata/repomd.xml: [Errno 14] HTTPS Error 302 - Found
+正在尝试其它镜像。
+软件包 gcc-4.8.5-44.el7.x86_64 已安装并且是最新版本
+正在解决依赖关系
+--> 正在检查事务
+---> 软件包 tcl.x86_64.1.8.5.13-8.el7 将被 安装
+--> 解决依赖关系完成
+
+依赖关系解决
+
+===========================================================================================================
+ Package              架构                    版本                             源                     大小
+===========================================================================================================
+正在安装:
+ tcl                  x86_64                  1:8.5.13-8.el7                   base                  1.9 M
+
+事务概要
+===========================================================================================================
+安装  1 软件包
+
+总下载量：1.9 M
+安装大小：4.4 M
+Downloading packages:
+tcl-8.5.13-8.el7.x86_64.rpm                                                         | 1.9 MB  00:00:01     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  正在安装    : 1:tcl-8.5.13-8.el7.x86_64                                                              1/1 
+  验证中      : 1:tcl-8.5.13-8.el7.x86_64                                                              1/1 
+
+已安装:
+  tcl.x86_64 1:8.5.13-8.el7                                                                                
+
+完毕！
+
+# 将安装包解压到指定文件夹
+[root@node1 ~]# tar -zxvf redis-6.2.6.tar.gz -C /export/server/
+
+# 创建软链接
+[root@node1 ~]# cd /export/server/
+[root@node1 server]# ln -snf /export/server/redis-6.2.6/ /export/server/redis
+[root@node1 server]# ll
+总用量 4
+drwxr-xr-x  11 hadoop hadoop  196 1月  12 18:31 apache-hive-3.1.3-bin
+drwxr-xr-x.  9 hadoop hadoop  220 12月 25 15:35 apache-tomcat-10.1.49
+drwxr-xr-x   8 hadoop hadoop  158 12月 28 14:47 apache-zookeeper-3.5.9-bin
+lrwxrwxrwx   1 hadoop hadoop   27 12月 28 19:16 flink -> /export/server/flink-1.10.0
+drwxr-xr-x  10 hadoop hadoop  156 2月   8 2020 flink-1.10.0
+lrwxrwxrwx   1 hadoop hadoop   27 1月   9 19:18 hadoop -> /export/server/hadoop-3.3.0
+drwxr-xr-x  11 hadoop hadoop  227 1月   9 21:01 hadoop-3.3.0
+lrwxrwxrwx   1 hadoop hadoop   26 12月 28 16:59 hbase -> /export/server/hbase-2.1.0
+drwxr-xr-x   8 hadoop hadoop  194 12月 28 17:39 hbase-2.1.0
+lrwxrwxrwx   1 hadoop hadoop   36 1月  12 15:42 hive -> /export/server/apache-hive-3.1.3-bin
+lrwxrwxrwx   1 hadoop hadoop   27 12月 28 11:27 jdk -> /export/server/jdk1.8.0_471
+drwxr-xr-x.  9 hadoop hadoop  126 12月 25 15:10 jdk-11.0.29
+drwxr-xr-x   8 hadoop hadoop  213 12月 28 11:26 jdk1.8.0_471
+lrwxrwxrwx   1 hadoop hadoop   31 12月 28 14:51 kafka -> /export/server/kafka_2.12-2.4.1
+drwxr-xr-x   8 hadoop hadoop  137 12月 28 14:59 kafka_2.12-2.4.1
+lrwxrwxrwx   1 root   root     27 5月  22 16:35 redis -> /export/server/redis-6.2.6/
+drwxrwxr-x   7 root   root   4096 10月  4 2021 redis-6.2.6
+lrwxrwxrwx   1 hadoop hadoop   40 12月 28 18:00 spark -> /export/server/spark-2.4.5-bin-hadoop2.7
+drwxr-xr-x  15 hadoop hadoop  235 12月 28 18:28 spark-2.4.5-bin-hadoop2.7
+lrwxrwxrwx.  1 hadoop hadoop   37 12月 25 15:37 tomcat -> /export/server/apache-tomcat-10.1.49/
+lrwxrwxrwx   1 hadoop hadoop   41 12月 28 14:44 zookeeper -> /export/server/apache-zookeeper-3.5.9-bin
+
+# 部署redis
+[root@node1 server]# cd redis
+[root@node1 redis]# ll
+总用量 236
+-rw-rw-r--  1 root root 33624 10月  4 2021 00-RELEASENOTES
+-rw-rw-r--  1 root root    51 10月  4 2021 BUGS
+-rw-rw-r--  1 root root  5026 10月  4 2021 CONDUCT
+-rw-rw-r--  1 root root  3384 10月  4 2021 CONTRIBUTING
+-rw-rw-r--  1 root root  1487 10月  4 2021 COPYING
+drwxrwxr-x  7 root root   145 10月  4 2021 deps
+-rw-rw-r--  1 root root    11 10月  4 2021 INSTALL
+-rw-rw-r--  1 root root   151 10月  4 2021 Makefile
+-rw-rw-r--  1 root root  6888 10月  4 2021 MANIFESTO
+-rw-rw-r--  1 root root 21567 10月  4 2021 README.md
+-rw-rw-r--  1 root root 93724 10月  4 2021 redis.conf
+-rwxrwxr-x  1 root root   275 10月  4 2021 runtest
+-rwxrwxr-x  1 root root   279 10月  4 2021 runtest-cluster
+-rwxrwxr-x  1 root root  1079 10月  4 2021 runtest-moduleapi
+-rwxrwxr-x  1 root root   281 10月  4 2021 runtest-sentinel
+-rw-rw-r--  1 root root 13768 10月  4 2021 sentinel.conf
+drwxrwxr-x  3 root root  4096 10月  4 2021 src
+drwxrwxr-x 11 root root   182 10月  4 2021 tests
+-rw-rw-r--  1 root root  3055 10月  4 2021 TLS.md
+drwxrwxr-x  9 root root  4096 10月  4 2021 utils
+[root@node1 redis]# make && make install
+cd src && make all
+make[1]: 进入目录“/export/server/redis-6.2.6/src”
+    CC Makefile.dep
+make[1]: 离开目录“/export/server/redis-6.2.6/src”
+make[1]: 进入目录“/export/server/redis-6.2.6/src”
+...
+    LINK redis-benchmark
+    INSTALL redis-check-rdb
+    INSTALL redis-check-aof
+
+Hint: It's a good idea to run 'make test' ;)
+
+make[1]: 离开目录“/export/server/redis-6.2.6/src”
+cd src && make install
+make[1]: 进入目录“/export/server/redis-6.2.6/src”
+    CC Makefile.dep
+make[1]: 离开目录“/export/server/redis-6.2.6/src”
+make[1]: 进入目录“/export/server/redis-6.2.6/src”
+
+Hint: It's a good idea to run 'make test' ;)
+
+    INSTALL redis-server
+    INSTALL redis-benchmark
+    INSTALL redis-cli
+make[1]: 离开目录“/export/server/redis-6.2.6/src”
+
+# redis默认部署在/usr/local/bin中
+[root@node1 redis]# cd /usr/local/bin
+[root@node1 bin]# ll
+总用量 18904
+-rwxr-xr-x 1 root root 4829488 5月  22 16:37 redis-benchmark
+lrwxrwxrwx 1 root root      12 5月  22 16:37 redis-check-aof -> redis-server
+lrwxrwxrwx 1 root root      12 5月  22 16:37 redis-check-rdb -> redis-server
+-rwxr-xr-x 1 root root 5003768 5月  22 16:37 redis-cli
+lrwxrwxrwx 1 root root      12 5月  22 16:37 redis-sentinel -> redis-server
+-rwxr-xr-x 1 root root 9518896 5月  22 16:37 redis-server
+
+# 返回上一个路径（测试redis环境是否部署成功，成功则可以在任意环境使用redis）
+[root@node1 bin]# cd -
+/export/server/redis
+[root@node1 redis]# redis-server 
+104885:C 22 May 2026 16:45:54.732 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+104885:C 22 May 2026 16:45:54.732 # Redis version=6.2.6, bits=64, commit=00000000, modified=0, pid=104885, just started
+104885:C 22 May 2026 16:45:54.732 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+104885:M 22 May 2026 16:45:54.733 * Increased maximum number of open files to 10032 (it was originally set to 1024).
+104885:M 22 May 2026 16:45:54.733 * monotonic clock: POSIX clock_gettime
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.2.6 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                  
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 104885
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           https://redis.io       
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+104885:M 22 May 2026 16:45:54.733 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+104885:M 22 May 2026 16:45:54.733 # Server initialized
+104885:M 22 May 2026 16:45:54.733 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+104885:M 22 May 2026 16:45:54.733 * Ready to accept connections
+
+# 修改redis配置（先备份一份原配置）
+[root@node1 redis]# cp redis.conf redis.conf.bck
+[root@node1 redis]# vi redis.conf
+# 开启任意系统访问
+将 bind: 127.0.0.1 改成 bind: 0.0.0.0
+# 开启后台模式
+将 daemonize no 改成 daemonize yes
+# 更改密码
+将  requirepass foobared 改成 requirepass 123456
+# 添加日志记录（默认记录在当前文件下(dir .)也就是开启redis时的文件夹）
+将 logfile "" 改成 logfile "redis.log"
+
+# 基于配置文件启动redis（需要在配置文件存放的文件夹中启动）
+[root@node1 redis]# redis-server redis.conf
+
+# 查看redis进程
+[root@node1 redis]# ps -ef | grep redis
+root      10668      1  0 17:14 ?        00:00:00 redis-server 0.0.0.0:6379
+root      10904  73294  0 17:14 pts/1    00:00:00 grep --color=auto redis
+# 关闭redis进程
+[root@node1 redis]# kill -9 10668
+[root@node1 redis]# ps -ef | grep redis
+
+# 配置系统文件设置开机自启
+[root@node1 redis]# vi /etc/systemd/system/redis.service
+[Unit]
+Description=redis-server
+After=network.target
+
+[Service]
+Type=forking
+# 第一个地址为部署位置，第二个为配置目录
+ExecStart=/usr/local/bin/redis-server /export/server/redis-6.2.6/redis.conf
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+
+# 重载系统服务并启动redis
+[root@node1 redis]# systemctl daemon-reload
+[root@node1 redis]# systemctl start redis
+[root@node1 redis]# systemctl status redis
+● redis.service - redis-server
+   Loaded: loaded (/etc/systemd/system/redis.service; disabled; vendor preset: disabled)
+  Drop-In: /etc/systemd/system/redis.service.d
+           └─limit.conf
+   Active: active (running) since 五 2026-05-22 17:39:22 CST; 6s ago
+  Process: 42924 ExecStart=/usr/local/bin/redis-server /export/server/redis-6.2.6/redis.conf (code=exited, status=0/SUCCESS)
+ Main PID: 42926 (redis-server)
+    Tasks: 5
+   CGroup: /system.slice/redis.service
+           └─42926 /usr/local/bin/redis-server 0.0.0.0:6379
+
+5月 22 17:39:22 node1 systemd[1]: Starting redis-server...
+5月 22 17:39:22 node1 systemd[1]: Started redis-server.
+
+# 设置redis开机自启
+[root@node1 redis]# systemctl enable redis
+Created symlink from /etc/systemd/system/multi-user.target.wants/redis.service to /etc/systemd/system/redis.service.
+
+# redis安装完后可通过命令行客户端 redis-cli 使用redis（如果redis有密码但是没有输入访问密码会返回权限不足，可以通过 AUTH 输入密码或者重新登录redis-cli补全密码）
+# -h选项：指定要连接的redis地址，默认是127.0.0.1
+# -p选项：指定要连接的redis节点的端口，默认是6379
+[root@node1 redis]# redis-cli -h 127.0.0.1 -p 6379
+127.0.0.1:6379> ping
+(error) NOAUTH Authentication required.
+127.0.0.1:6379> AUTH 123456
+OK
+127.0.0.1:6379> ping
+PONG
+
+# -a选项：指定redis的访问密码
+[root@node1 redis]# redis-cli -h 127.0.0.1 -p 6379 -a 123456
+Warning: Using a password with '-a' or '-u' option on the command line interface may not be safe.
+127.0.0.1:6379> ping
+PONG
+
+# 创建key-value
+127.0.0.1:6379> set name zhangsan
+OK
+127.0.0.1:6379> set age 20
+OK
+
+#批量创建key-value
+127.0.0.1:6379> mset k1 v1 k2 v2 k3 v3
+OK
+
+# 根据多个key获取多个String类型的value
+127.0.0.1:6379> mget name age k1 k2 k3
+1) "zhangsan"
+2) "20"
+3) "v1"
+4) "v2"
+5) "v3"
+
+# 查看符合模板的所有key（不建议在生产环境中使用，因为redis是单线程操作容易照成堵塞）
+# 通配符*：代指一个或多个字符
+127.0.0.1:6379> keys *
+1) "k3"
+2) "name"
+3) "k2"
+4) "k1"
+5) "age"
+# 通配符?：代指一个字符
+127.0.0.1:6379> keys a??
+1) "age"
+
+# 删除key（可批量删除）
+127.0.0.1:6379> del k1 k2 k3
+(integer) 3
+127.0.0.1:6379> keys *
+1) "name"
+2) "age"
+
+# 判断key是否存在
+127.0.0.1:6379> exists name
+(integer) 1
+127.0.0.1:6379> exists k1
+(integer) 0
+
+# 为已有的key设置有效期（单位：秒）（因为redis在内存中运行，容易占满内存）
+127.0.0.1:6379> expire age 20
+(integer) 1
+
+# 查看key剩余有效期
+# 返回值>0时为key剩余有效期；返回值=-1表示key永久有效；返回值=-2表示key已过期
+127.0.0.1:6379> ttl age
+(integer) 15
+127.0.0.1:6379> ttl age
+(integer) 13
+127.0.0.1:6379> ttl age
+(integer) -2
+
+# value自增
+127.0.0.1:6379> incr age
+(integer) 21
+
+# 指定增长间隔
+127.0.0.1:6379> incrby age 2
+(integer) 23
+
+# 指定浮点数增长间隔
+127.0.0.1:6379> set score 88.3
+OK
+127.0.0.1:6379> incrbyfloat score 0.3
+"88.60000000000000001"
+
+# redis的key格式：项目名:业务名:类型:id
+127.0.0.1:6379> set project:user:1 '{"id":1, "name":"zhangsan", "age": 20}'
+OK
+127.0.0.1:6379> set project:user:2 '{"id":2, "name":"lisi", "age": 25}'
+OK
+127.0.0.1:6379> set project:product:1 '{"id":1, "name":"xiaomi", "price": 2500}'
+OK
+127.0.0.1:6379> set project:product:2 '{"id":2, "name":"samsung", "price": 5000}'
+OK
+127.0.0.1:6379> keys *
+ 1) "project:user:2"
+ 2) "k3"
+ 3) "name"
+ 4) "k2"
+ 5) "project:product:1"
+ 6) "project:user:1"
+ 7) "project:product:2"
+ 8) "k1"
+ 9) "age"
+10) "score"
+
+# Hash常见命令
+# 使用Hash表存储/查询
+127.0.0.1:6379> hset project:user:3 name wangwu
+(integer) 1
+127.0.0.1:6379> hset project:user:3 age 22
+(integer) 1
+127.0.0.1:6379> hset project:user:3 age 18
+(integer) 0
+127.0.0.1:6379> hget project:user:3 name
+"wangwu"
+127.0.0.1:6379> hget project:user:3 age
+"18"
+127.0.0.1:6379> hmset project:user:4 name zhaoliu age 21
+OK
+127.0.0.1:6379> hmget project:user:4 name age
+1) "zhaoliu"
+2) "21"
+
+# 返回所有Hash键/值
+127.0.0.1:6379> hkeys project:user:4
+1) "name"
+2) "age"
+127.0.0.1:6379> hvals project:user:4
+1) "zhaoliu"
+2) "21"
+127.0.0.1:6379> hgetall project:user:4
+1) "name"
+2) "zhaoliu"
+3) "age"
+4) "21"
+
+# Hash值自增
+127.0.0.1:6379> hincrby project:user:4 age 1
+(integer) 22
+127.0.0.1:6379> hgetall project:user:4
+1) "name"
+2) "zhaoliu"
+3) "age"
+4) "22"
+
+# List常见命令
+# Push/Pop
+127.0.0.1:6379> lpush users 1 2 3
+(integer) 3
+127.0.0.1:6379> rpush users 4 5 6
+(integer) 6
+127.0.0.1:6379> lpop users 1
+1) "3"
+127.0.0.1:6379> rpop users 1
+1) "6"
+
+# Range：返回一段角标范围内的所有元素
+127.0.0.1:6379> lrange users 1 2
+1) "1"
+2) "4"
+
+# BLPOP/BRPOP：阻塞式pop，可以给定时间，时间内均能返回指定的元素，时间过后没收到对应元素则返回nil
+127.0.0.1:6379> blpop users2 100
+
+# 此时在另一个终端传入值
+127.0.0.1:6379> lpush users2 zhangsan
+(integer) 1
+
+127.0.0.1:6379> blpop users2 100
+1) "users2"
+2) "zhangsan"
+(17.97s)
+
+# Set常见命令
+127.0.0.1:6379> sadd zhangsan lisi wangwu zhaoliu
+(integer) 3
+127.0.0.1:6379> sadd lisi wangwu sunqi chenba
+(integer) 3
+# 查询集合里的元素个数
+127.0.0.1:6379> scard zhangsan
+(integer) 3
+# 查询zhangsan和lisi的共同好友（交集）
+127.0.0.1:6379> sinter zhangsan lisi
+1) "wangwu"
+# 查询zhangsan和lisi的非共同好友（差集）
+127.0.0.1:6379> sdiff zhangsan lisi
+1) "zhaoliu"
+2) "lisi"
+# 查询lisi是不是张三的好友（查询值）
+127.0.0.1:6379> sismember zhangsan lisi
+(integer) 1
+127.0.0.1:6379> sismember lisi zhangsan
+(integer) 0
+# 移除zhangsan集合里的lisi
+127.0.0.1:6379> srem zhangsan lisi
+(integer) 1
+127.0.0.1:6379> smembers zhangsan
+1) "zhaoliu"
+2) "wangwu"
+
+# SortedSet常见命令（SortedSet中的每一个元素都带score属性，根据score来排序，底层的实现是一个跳表(SkipList)+hash表）
+127.0.0.1:6379> zadd stu 85 zhangsan 89 lisi 82 wangwu 95 zhaoliu 78 sunqi
+(integer) 5
+127.0.0.1:6379> zrem stu zhaoliu
+(integer) 1
+# 查看wangwu排名（由于Sorted排序是降序排序，wangwu的score为倒2，降序排序就为1（从0开始））
+127.0.0.1:6379> zrank stu wangwu
+(integer) 1
+# 查看wangwu倒序排名（默认从0开始）
+127.0.0.1:6379> zrevrank stu wangwu
+(integer) 2
+# 查看stu有几个值
+127.0.0.1:6379> zcard stu
+(integer) 4
+# 查看score在0-80有几个元素
+127.0.0.1:6379> zcount stu 0 80
+(integer) 1
+# 为sunqi的值+2
+127.0.0.1:6379> zincrby stu 2 sunqi
+"80"
+# 查看排名（同zrank一样）
+127.0.0.1:6379> zrange stu 0 2
+1) "sunqi"
+2) "wangwu"
+3) "zhangsan"
+127.0.0.1:6379> zrevrange stu 0 2
+1) "lisi"
+2) "zhangsan"
+3) "wangwu"
+# 查看指定范围内的排名
+127.0.0.1:6379> zrangebyscore stu 0 85
+1) "sunqi"
+2) "wangwu"
+3) "zhangsan"
+
