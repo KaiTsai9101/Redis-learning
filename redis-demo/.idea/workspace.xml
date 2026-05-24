@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0b2ad7fa-2255-4783-b9b0-865cece1c398" name="更改" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="F:\dev\Maven\repository" />
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+        <option name="userSettingsFile" value="F:\dev\apache-maven-3.9.15\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3E8QidiGYwPqf8ES3d30v69hR8f" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.RedisDemoApplicationTests.contextLoads.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.RedisDemoApplicationTests.testSaveUser.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RedisStringTests.contextLoads.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RedisStringTests.testHash.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.RedisStringTests.testSaveUser.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.redis-demo [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.redis-demo [test].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="chapter1.test" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.RedisStringTests.contextLoads">
+    <configuration name="RedisDemoApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="redis-demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="chapter1.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="chapter1.test" />
+      <option name="MAIN_CLASS_NAME" value="chapter1.test.RedisDemoApplicationTests" />
+      <option name="METHOD_NAME" value="contextLoads" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RedisDemoApplicationTests.testSaveUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="redis-demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="chapter1.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="chapter1.test" />
+      <option name="MAIN_CLASS_NAME" value="chapter1.test.RedisDemoApplicationTests" />
+      <option name="METHOD_NAME" value="testSaveUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RedisStringTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="redis-demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="chapter1.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="chapter1.test" />
+      <option name="MAIN_CLASS_NAME" value="chapter1.test.RedisStringTests" />
+      <option name="METHOD_NAME" value="contextLoads" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RedisStringTests.testHash" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="redis-demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="chapter1.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="chapter1.test" />
+      <option name="MAIN_CLASS_NAME" value="chapter1.test.RedisStringTests" />
+      <option name="METHOD_NAME" value="testHash" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RedisStringTests.testSaveUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="redis-demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="chapter1.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="chapter1.test" />
+      <option name="MAIN_CLASS_NAME" value="chapter1.test.RedisStringTests" />
+      <option name="METHOD_NAME" value="testSaveUser" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RedisDemoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="redis-demo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="chapter1.test.RedisDemoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.RedisStringTests.contextLoads" />
+        <item itemvalue="JUnit.RedisStringTests.testHash" />
+        <item itemvalue="JUnit.RedisStringTests.testSaveUser" />
+        <item itemvalue="JUnit.RedisDemoApplicationTests.testSaveUser" />
+        <item itemvalue="JUnit.RedisDemoApplicationTests.contextLoads" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.32098.37" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.32098.37" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="StructureViewState">
+    <option name="selectedTab" value="逻辑" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="0b2ad7fa-2255-4783-b9b0-865cece1c398" name="更改" comment="" />
+      <created>1779557844967</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1779557844967</updated>
+      <workItem from="1779557846165" duration="142000" />
+      <workItem from="1779600875766" duration="4978000" />
+      <workItem from="1779613144151" duration="285000" />
+      <workItem from="1779613441099" duration="39000" />
+      <workItem from="1779613491290" duration="3889000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
