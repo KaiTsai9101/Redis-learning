@@ -8,9 +8,13 @@ import com.hmdp.service.ISeckillVoucherService;
 import com.hmdp.service.IVoucherOrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hmdp.utils.RedisIdWorker;
+import com.hmdp.utils.SimpleRedisLock;
 import com.hmdp.utils.UserHolder;
 import lombok.NonNull;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.aop.framework.AopContext;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +33,12 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
 
     @Resource
     private RedisIdWorker redisIdWorker;
+
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
+
+    @Resource
+    private RedissonClient redissonClient;
 
     @Override
     public Result seckillVoucher(Long voucherId) {
@@ -52,13 +62,30 @@ public class VoucherOrderServiceImpl extends ServiceImpl<VoucherOrderMapper, Vou
 
         // 5.一人一单
         Long userId = UserHolder.getUser().getId();
-        // 锁放在这里而不是createVoucherOrder方法内
-        // 原因：方法执行完后就释放锁了，但此时数据由spring提交，期间如果其他线程获取锁，则无法查询到订单记录，从而导致并发安全问题（仍可重复购买优惠券）
-        synchronized(userId.toString().intern()) {
+//        // 锁放在这里而不是createVoucherOrder方法内
+//        // 原因：方法执行完后就释放锁了，但此时数据由spring提交，期间如果其他线程获取锁，则无法查询到订单记录，从而导致并发安全问题（仍可重复购买优惠券）
+//        synchronized(userId.toString().intern()) {
+//            // 获取代理对象（事务）（Spring只能给代理对象创建事务Transactional，不能给目标对象this）
+//            // AopContext.currentProxy() 的功能和getBean()一样，都是获取bean对象
+//            IVoucherOrderService proxy = (IVoucherOrderService) AopContext.currentProxy();
+//            return proxy.createVoucherOrder(voucherId);
+//        }
+        // 创建锁对象
+//        SimpleRedisLock lock = new SimpleRedisLock(stringRedisTemplate, "order:" + userId);
+        RLock lock = redissonClient.getLock("lock:order:" + userId);
+        // 获取锁
+        boolean isLook = lock.tryLock();
+        if (!isLook) {
+            // 获取锁失败
+            return Result.fail("不允许重复下单");
+        }
+        try {
             // 获取代理对象（事务）（Spring只能给代理对象创建事务Transactional，不能给目标对象this）
             // AopContext.currentProxy() 的功能和getBean()一样，都是获取bean对象
             IVoucherOrderService proxy = (IVoucherOrderService) AopContext.currentProxy();
             return proxy.createVoucherOrder(voucherId);
+        } finally {
+            lock.unlock();
         }
     }
 
