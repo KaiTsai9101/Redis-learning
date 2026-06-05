@@ -45,10 +45,14 @@ public class ShopServiceImpl extends ServiceImpl<ShopMapper, Shop> implements IS
 
         // 互斥锁解决缓存击穿
         // Shop shop = queryWithMutex(id);
+        System.out.println("========== 查询店铺ID: " + id + " ==========");
 
         // 逻辑过期解决缓存击穿
         Shop shop = cacheClient.queryWithLogicalExpire(
                 CACHE_SHOP_KEY, id, Shop.class, id1 -> getById(id1), CACHE_SHOP_TTL, TimeUnit.MINUTES);
+
+        System.out.println("========== 查询结果: " + shop + " ==========");
+
         if (shop == null) {
             return Result.fail("店铺不存在");
         }
